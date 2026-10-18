@@ -1,7 +1,8 @@
 (function () {
   'use strict';
   var root = document.documentElement;
-  
+
+
 // Mobile hamburger menu
 var menuToggle = document.getElementById('menuToggle');
 var mainNav = document.getElementById('mainNav');
@@ -33,9 +34,18 @@ if (menuToggle && mainNav) {
 
     // Close with Escape
     document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') {
+        if (event.key === 'Escape' && mainNav.classList.contains('open')) {
             closeMenu();
             menuToggle.focus();
+        }
+    });
+
+    // Close when tapping outside the menu
+    document.addEventListener('click', function (event) {
+        if (mainNav.classList.contains('open') &&
+            !mainNav.contains(event.target) &&
+            !menuToggle.contains(event.target)) {
+            closeMenu();
         }
     });
 
@@ -78,6 +88,16 @@ if (menuToggle && mainNav) {
     }
   });
 
+  // Journey timeline: accent line fills as you scroll through it
+  var tl = document.querySelector('.timeline');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function updateTimeline() {
+    if (!tl || reduceMotion) return;
+    var r = tl.getBoundingClientRect();
+    var p = (window.innerHeight * 0.65 - r.top) / r.height;
+    tl.style.setProperty('--tl-progress', Math.max(0, Math.min(1, p)).toFixed(3));
+  }
+
   // Scroll progress bar
   var bar = document.getElementById('progress');
   var ticking = false;
@@ -85,6 +105,7 @@ if (menuToggle && mainNav) {
     var max = document.documentElement.scrollHeight - window.innerHeight;
     var pct = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
     bar.style.transform = 'scaleX(' + pct + ')';
+    updateTimeline();
     ticking = false;
   }
   window.addEventListener('scroll', function () {
