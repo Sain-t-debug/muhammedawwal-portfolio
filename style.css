@@ -3,21 +3,56 @@
 /* =========================================================
    1. TOKENS (dark theme only)
    ========================================================= */
-:root{
-  color-scheme:dark;
-  --bg:#16143a; --surface:#1f1d50; --ink:#eeeefc; --muted:#b4b2e0; --line:#36337a; --tag:#2a2866;
-  --accent:#67e8f9;
-  --hero-bg:#2b2a78; --hero-ink:#f4f3ff; --hero-muted:#d4d2ff; --hero-line:rgba(244,243,255,.34);
-  --btn-bg:#f4f3ff; --btn-ink:#1c1a6b; --signal:#67e8f9;
-  --grid:rgba(255,255,255,.07);
-  --code:#100f30; --code-ink:#ebebfc; --code-dim:#9a98cc;
-  --display:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"Fira Code",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&family=Fira+Code:wght@400..600&display=swap");
+
+/* 1. TOKENS — CHARCOAL GREY THEME */
+:root {
+    color-scheme: dark;
+
+    /* Main background and surfaces */
+    --bg: #202124;
+    --surface: #2B2D31;
+    --ink: #F1F1F1;
+    --muted: #B0B3B8;
+    --line: #41444A;
+    --tag: #34373D;
+
+    /* Accent colour — cool cyan */
+    --accent: #67E8F9;
+
+    /* Hero and contact panels */
+    --hero-bg: #30343B;
+    --hero-ink: #FFFFFF;
+    --hero-muted: #D1D5DB;
+    --hero-line: rgba(255, 255, 255, 0.28);
+
+    /* Buttons */
+    --btn-bg: #F1F1F1;
+    --btn-ink: #202124;
+    --signal: #67E8F9;
+
+    /* Background grid */
+    --grid: rgba(255, 255, 255, 0.055);
+
+    /* Code editor */
+    --code: #17181B;
+    --code-ink: #E8EAF0;
+    --code-dim: #A0A4AD;
+
+    /* Typography */
+    --display: "Plus Jakarta Sans", system-ui, -apple-system,
+        "Segoe UI", Roboto, sans-serif;
+    --sans: "Plus Jakarta Sans", system-ui, -apple-system,
+        "Segoe UI", Roboto, sans-serif;
+    --mono: "Fira Code", ui-monospace, SFMono-Regular,
+        Menlo, Consolas, monospace;
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
 
 /* =========================================================
    2. BASE
