@@ -91,11 +91,23 @@ if (menuToggle && mainNav) {
   // Journey timeline: accent line fills as you scroll through it
   var tl = document.querySelector('.timeline');
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tlItems = tl ? tl.querySelectorAll('li') : [];
   function updateTimeline() {
-    if (!tl || reduceMotion) return;
+    if (!tl) return;
+    if (reduceMotion) {
+      // no scroll animation: show everything as reached
+      tl.style.setProperty('--tl-progress', '1');
+      tlItems.forEach(function (li) { li.classList.add('reached'); });
+      return;
+    }
     var r = tl.getBoundingClientRect();
-    var p = (window.innerHeight * 0.65 - r.top) / r.height;
-    tl.style.setProperty('--tl-progress', Math.max(0, Math.min(1, p)).toFixed(3));
+    var p = Math.max(0, Math.min(1, (window.innerHeight * 0.65 - r.top) / r.height));
+    tl.style.setProperty('--tl-progress', p.toFixed(3));
+    // an item counts as "reached" once the glowing line passes its dot
+    var y = p * r.height;
+    tlItems.forEach(function (li) {
+      li.classList.toggle('reached', y >= li.offsetTop + 8);
+    });
   }
 
   // Scroll progress bar
